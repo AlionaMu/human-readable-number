@@ -1,102 +1,27 @@
-/*module.exports =*/ 
-function toReadable (number) {
-    var array = number.toString().split('').map(Number);
-    switch(array[0]){
-        case 0:
-            break;
-        case 1:
-            x="one hundred";
-            break;
-        case 2:
-            x="two hundred";
-            break;
-            case 3:
-            x="three hundred";
-            break;
-             case 4:
-            x="four hundred";
-            break;
-             case 5:
-            x="five hundred";
-            break;
-             case 6:
-            x="six hundred";
-            break;
-             case 7:
-           x="seven hundred";
-            break;
-             case 8:
-            x="eight hundred";
-            break;
-             case 9:
-            x="nine hundred";
-            break;
-            }
-    switch(array[1]){
-        case 0:
-            break;
-        case 1:
-            y="Один";
-            break;
-        case 2:
-            y="twenty";
-            break;
-            case 3:
-            y="thirty";
-            break;
-             case 4:
-            y= "forty";
-            break;
-             case 5:
-            y="fifty";
-            break;
-             case 6:
-            y="sixty";
-            break;
-             case 7:
-           y="seventy";
-            break;
-             case 8:
-            y="eighty";
-            break;
-             case 9:
-            y="ninety";
-            break;
-            }
-    switch(array[2]){
-        case 0:
-            break;
-        case 1:
-            z="one";
-            break;
-        case 2:
-            z="two";
-            break;
-            case 3:
-            z="three";
-            break;
-             case 4:
-            z="four";
-            break;
-             case 5:
-            z="five";
-            break;
-             case 6:
-            z="six";
-            break;
-             case 7:
-           z="seven";
-            break;
-             case 8:
-            z="eight";
-            break;
-             case 9:
-            z="nine";
-            break;
-            }
-
-
-result = x + " " + y + " " + z;
-return result;
+module.exports = function toReadable (number) {
+    var arr = [
+        [, "one", "two", "three", "four", "five", "six",
+            "seven", "eight", "nine", "ten", "eleven",
+            "twelve", "thirteen", "fourteen", "fifteen",
+            "sixteen", "seventeen", "eighteen", "nineteen"],
+    
+        [,,"twenty", "thirty", "forty", "fifty", "sixty",
+            "seventy", "eighty", "ninety"],
+    ];
+if (number < 20){
+    return arr[0][number];
 }
-console.log (toReadable(532));
+if (number >= 100) {
+    var x = number.toString().substring(1,2);
+    if (parseInt(number%100) < 20) {
+        return (arr[0][parseInt(number/100)] + ' hundred ' + arr[0][parseInt(number%100)]);
+    }
+    else if (parseInt(number%100) >= 0) {
+        return (arr[0][parseInt(number/100)] + ' hundred ' + arr[1][x] + ' ' + arr[0][parseInt(number%10)]);
+    }
+    else {return ('');}
+}
+return  (arr[1][parseInt(number/10)] + ' ' + (parseInt(number%10)? arr[0][parseInt(number%10)]:'' ));
+}
+
+
